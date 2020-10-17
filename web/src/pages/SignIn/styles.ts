@@ -1,0 +1,57 @@
+import styled from 'styled-components';
+
+import signInBackground from '../../assets/signin3.svg'
+
+export const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: stretch;
+  background: #5636D3;
+`;
+
+export const Content = styled.div`
+  width: 100%;
+  max-width: 700px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 50px;
+  }
+
+  form {
+    width: 340px;
+    text-align: center;
+    margin-top: 80px;
+
+    h1 {
+      font-weight: 500;
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  }
+
+  a {
+    margin-top: 80px;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 18px;
+      color: #FF872C;
+    }
+  }
+`;
+
+export const Background = styled.div`
+  flex: 1;
+  background: url(${signInBackground}) no-repeat center;
+  background-size: cover;
+`;
+
