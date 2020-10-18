@@ -12,7 +12,7 @@ export const Content = styled.div`
 
     thead {
       td {
-        color: #969CB2;
+        color: #969cb2;
         padding: 20px;
 
         span {
@@ -25,7 +25,7 @@ export const Content = styled.div`
     tbody {
       td {
         background: #fff;
-        color: #363F5F;
+        color: #363f5f;
         padding: 20px;
       }
 
@@ -55,10 +55,7 @@ export const CardContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      p {
-        color: 363F5F, 100%;
-      }
+      color: #363f5f;
     }
 
     & + div {
@@ -66,8 +63,11 @@ export const CardContainer = styled.div`
     }
 
     & + div + div {
-      background: #FF872C;
-      color: #fff;
+      background: #ff872c;
+
+      p {
+        color: #fff;
+      }
 
       h1 {
         color: #fff;
@@ -75,7 +75,7 @@ export const CardContainer = styled.div`
     }
 
     h1 {
-      color: #363F5F;
+      color: #363f5f;
       font-size: 36px;
       font-weight: 500;
     }

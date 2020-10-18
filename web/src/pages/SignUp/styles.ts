@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import signUpBackground from '../../assets/signup.svg'
+import signUpBackground from '../../assets/signup.svg';
 
 export const Container = styled.div`
   height: 100vh;
   display: flex;
   justify-content: stretch;
-  background: #5636D3;
+  background: #5636d3;
 `;
 
 export const Content = styled.div`
@@ -44,7 +44,7 @@ export const Content = styled.div`
 
     svg {
       margin-right: 18px;
-      color: #FF872C;
+      color: #ff872c;
     }
   }
 `;
@@ -54,4 +54,3 @@ export const Background = styled.div`
   background: url(${signUpBackground}) no-repeat bottom;
   background-size: cover;
 `;
-

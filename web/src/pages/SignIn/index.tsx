@@ -18,7 +18,12 @@ const SignIn: React.FC = () => {
         <form>
           <h1>Faça seu login</h1>
           <Input name="email" placeholder="E-mail" icon={FiMail} />
-          <Input type="password" name="email" placeholder="Senha" icon={FiLock} />
+          <Input
+            type="password"
+            name="email"
+            placeholder="Senha"
+            icon={FiLock}
+          />
           <Button type="submit">Entrar</Button>
         </form>
         <Link to="/signup">
@@ -29,6 +34,6 @@ const SignIn: React.FC = () => {
       <Background />
     </Container>
   );
-}
+};
 
 export default SignIn;

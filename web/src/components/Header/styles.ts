@@ -8,12 +8,13 @@ interface ContainerProps {
 export const Container = styled.header<ContainerProps>`
   width: 100%;
   height: 92px;
-  background: #5636D3;
+  background: #5636d3;
 
-
-  ${props => props.isLarge && css`
-    height: 238px;
-  `}
+  ${props =>
+    props.isLarge &&
+    css`
+      height: 238px;
+    `}
 
   > div {
     width: 100%;

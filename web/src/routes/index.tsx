@@ -14,6 +14,6 @@ const Routes: React.FC = () => {
       <Route path="/signup" component={SignUp} />
     </Switch>
   );
-}
+};
 
 export default Routes;

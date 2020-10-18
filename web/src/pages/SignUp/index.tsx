@@ -20,7 +20,12 @@ const SignUp: React.FC = () => {
           <h1>Faça seu cadastro</h1>
           <Input name="name" placeholder="Nome" icon={FiUser} />
           <Input name="email" placeholder="E-mail" icon={FiMail} />
-          <Input type="password" name="email" placeholder="Senha" icon={FiLock} />
+          <Input
+            type="password"
+            name="email"
+            placeholder="Senha"
+            icon={FiLock}
+          />
           <Button type="submit">Cadastrar</Button>
         </form>
         <Link to="/">
@@ -30,6 +35,6 @@ const SignUp: React.FC = () => {
       </Content>
     </Container>
   );
-}
+};
 
 export default SignUp;

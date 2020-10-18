@@ -7,7 +7,7 @@ export const Container = styled.div`
   border-radius: 10px;
   border: 2px solid #fff;
   padding: 20px;
-  color: #969CB2;
+  color: #969cb2;
   display: flex;
   align-items: center;
 
@@ -23,10 +23,10 @@ export const Container = styled.div`
     flex: 1;
     background: transparent;
     border: 0;
-    color: #363F5F;
+    color: #363f5f;
 
     &::placeholder {
-      color: #969CB2;
+      color: #969cb2;
     }
   }
 `;

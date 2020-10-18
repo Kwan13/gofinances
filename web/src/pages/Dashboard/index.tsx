@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 // componentes
 import Header from '../../components/Header';
@@ -13,7 +13,7 @@ import totalImg from '../../assets/total.svg';
 const Dashboard: React.FC = () => {
   return (
     <>
-      <Header large={true} />
+      <Header large />
       <Content>
         <CardContainer>
           <div>
@@ -55,7 +55,6 @@ const Dashboard: React.FC = () => {
                   Preço
                   <FiChevronDown />
                 </span>
-
               </td>
               <td>
                 <span>
@@ -66,7 +65,7 @@ const Dashboard: React.FC = () => {
               <td>
                 <span>
                   Data
-                  <FiChevronUp color="#FF872C"/>
+                  <FiChevronUp color="#FF872C" />
                 </span>
               </td>
             </tr>
@@ -90,6 +89,6 @@ const Dashboard: React.FC = () => {
       </Content>
     </>
   );
-}
+};
 
 export default Dashboard;
