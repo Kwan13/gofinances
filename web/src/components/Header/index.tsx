@@ -16,10 +16,10 @@ const Header: React.FC<HeaderProps> = ({ large = false }) => {
         <img src={logoImg} alt="GoFinances" />
         <ul>
           <li>
-            <Link to="/">Transações</Link>
+            <Link to="/dashboard">Transações</Link>
           </li>
           <li>
-            <Link to="/">Nova transação</Link>
+            <Link to="/add">Nova transação</Link>
           </li>
         </ul>
       </div>
