@@ -8,6 +8,8 @@ import React, {
 import { IconBaseProps } from 'react-icons';
 import { useField } from '@unform/core';
 
+import Tooltip from '../Tooltip/index';
+
 // styles
 import { Container } from './styles';
 
@@ -20,6 +22,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [isErroed, setIsErrored] = useState(false);
   const { defaultValue, error, fieldName, registerField } = useField(name);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   }, []);
 
   return (
-    <Container isFocused={isFocused} isFilled={isFilled}>
+    <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
       {Icon && <Icon size={20} />}
       <input
         onFocus={handleInputFocus}
@@ -50,7 +53,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         defaultValue={defaultValue}
         {...rest}
       />
-      {error}
+      {error && <Tooltip title={error} />}
     </Container>
   );
 };
