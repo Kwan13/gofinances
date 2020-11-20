@@ -5,6 +5,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "docker",
+    "database": "gofinances",
     "entities": ["./src/models/*.ts"],
     "migrations": ["./src/database/migrations/*.ts"],
     "cli": {
