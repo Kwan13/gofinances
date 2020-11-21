@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 
+// Global exception handling
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {
