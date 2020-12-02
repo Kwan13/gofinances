@@ -4,10 +4,15 @@ import { getCustomRepository } from 'typeorm';
 import CreateTransactionService from '../services/CreateTransactionService';
 import TransactionsRepository from '../repositories/TransactionsRepository';
 
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 const transactionsRouter = Router();
 
+transactionsRouter.use(ensureAuthenticated);
+
 transactionsRouter.post('/', async (request, response) => {
-  const { title, value, type, category, user_id } = request.body;
+  const { title, value, type, category } = request.body;
+  const { id } = request.user;
 
   const createTransaction = new CreateTransactionService();
 
@@ -16,14 +21,14 @@ transactionsRouter.post('/', async (request, response) => {
     value,
     type,
     category,
-    user_id,
+    user_id: id,
   });
 
   return response.status(200).json(transaction);
 });
 
 transactionsRouter.get('/', async (request, response) => {
-  const user_id = '70be7fd2-78dc-48bb-92d4-e6845185ef20';
+  const { id: user_id } = request.user;
 
   const transactionsRepository = getCustomRepository(TransactionsRepository);
 

@@ -25,7 +25,7 @@ class CreateTransactionService {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
     const usersRepository = getRepository(User);
 
-    const { total } = await transactionsRepository.getBalance({ user_id });
+    // const { total } = await transactionsRepository.getBalance({ user_id });
 
     const userExists = await usersRepository.findOne(user_id);
 
@@ -33,9 +33,9 @@ class CreateTransactionService {
       throw new AppError('This user does not exists.');
     }
 
-    if (type === 'outcome' && total < value) {
-      throw new AppError('You do not have enough balance');
-    }
+    // if (type === 'outcome' && total < value) {
+    //   throw new AppError('You do not have enough balance');
+    // }
 
     const transaction = transactionsRepository.create({
       id: uuid(),
