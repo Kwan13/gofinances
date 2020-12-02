@@ -26,6 +26,10 @@ const AddTransaction: React.FC = () => {
       const schema = Yup.object().shape({
         title: Yup.string().required('Campo obrigatório.'),
         price: Yup.string().required('Campo obrigatório.'),
+        type: Yup.string().equals(
+          ['income', 'outcome'],
+          'Informe "income" ou "outcome".',
+        ),
         category: Yup.string().required('Campo obrigatório.'),
       });
 
@@ -45,10 +49,15 @@ const AddTransaction: React.FC = () => {
     <>
       <Header />
       <Container>
-        <Form onSubmit={handleSubmit} ref={formRef}>
+        <Form
+          onSubmit={handleSubmit}
+          ref={formRef}
+          initialData={{ type: 'income' }}
+        >
           <h1>Nova Transação</h1>
           <Input name="title" placeholder="Titulo" />
           <Input name="price" placeholder="Preço" />
+          <Input name="type" placeholder="Tipo" />
           <Input name="category" placeholder="Categoria" />
 
           <Button>Cadastrar</Button>

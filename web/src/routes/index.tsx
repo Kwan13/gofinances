@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import Route from './Route';
 
 // pages
 import Dashboard from '../pages/Dashboard';
@@ -10,10 +12,10 @@ import AddTransaction from '../pages/AddTransaction';
 const Routes: React.FC = () => {
   return (
     <Switch>
-      <Route path="/dashboard" component={Dashboard} />
       <Route path="/" exact component={SignIn} />
+      <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/signup" component={SignUp} />
-      <Route path="/add" component={AddTransaction} />
+      <Route path="/add" component={AddTransaction} isPrivate />
     </Switch>
   );
 };
