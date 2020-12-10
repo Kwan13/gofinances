@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiPower } from 'react-icons/fi';
+
+import { useAuth } from '../../context/AuthContext';
 
 // styles
 import { Container } from './styles';
@@ -10,6 +13,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ large = false }) => {
+  const { signOut } = useAuth();
+
   return (
     <Container isLarge={large}>
       <div>
@@ -20,6 +25,11 @@ const Header: React.FC<HeaderProps> = ({ large = false }) => {
           </li>
           <li>
             <Link to="/add">Nova transação</Link>
+          </li>
+          <li>
+            <button type="button" onClick={signOut}>
+              <FiPower size={20} />
+            </button>
           </li>
         </ul>
       </div>

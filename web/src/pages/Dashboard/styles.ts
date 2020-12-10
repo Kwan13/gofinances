@@ -27,6 +27,13 @@ export const Content = styled.div`
         background: #fff;
         color: #363f5f;
         padding: 20px;
+
+        &.income {
+          color: #12a454;
+        }
+        &.outcome {
+          color: #e83f5b;
+        }
       }
 
       td:first-child {

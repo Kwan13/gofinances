@@ -7,6 +7,9 @@ import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import api from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 // styles
@@ -14,36 +17,48 @@ import { Container } from './styles';
 
 interface FormData {
   title: string;
-  price: string;
+  value: number;
+  type: string;
   category: string;
 }
 
 const AddTransaction: React.FC = () => {
+  const { token } = useAuth();
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(async (data: FormData) => {
-    try {
-      formRef.current?.setErrors({});
-      const schema = Yup.object().shape({
-        title: Yup.string().required('Campo obrigatório.'),
-        price: Yup.string().required('Campo obrigatório.'),
-        type: Yup.string().equals(
-          ['income', 'outcome'],
-          'Informe "income" ou "outcome".',
-        ),
-        category: Yup.string().required('Campo obrigatório.'),
-      });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+  const handleSubmit = useCallback(
+    async (data: FormData, { reset }) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          title: Yup.string().required('Campo obrigatório.'),
+          value: Yup.number().required('Campo obrigatório.'),
+          type: Yup.string().equals(
+            ['income', 'outcome'],
+            'Informe "income" ou "outcome".',
+          ),
+          category: Yup.string().required('Campo obrigatório.'),
+        });
 
-      console.log(data);
-    } catch (err) {
-      const error = getValidationErrors(err);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      formRef.current?.setErrors(error);
-    }
-  }, []);
+        await api.post('/transactions', data, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        reset();
+      } catch (err) {
+        const error = getValidationErrors(err);
+
+        formRef.current?.setErrors(error);
+      }
+    },
+    [token],
+  );
 
   return (
     <>
@@ -56,7 +71,7 @@ const AddTransaction: React.FC = () => {
         >
           <h1>Nova Transação</h1>
           <Input name="title" placeholder="Titulo" />
-          <Input name="price" placeholder="Preço" />
+          <Input name="value" placeholder="Valor" />
           <Input name="type" placeholder="Tipo" />
           <Input name="category" placeholder="Categoria" />
 

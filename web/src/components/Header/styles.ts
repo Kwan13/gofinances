@@ -45,6 +45,21 @@ export const Container = styled.header<ContainerProps>`
             color: ${shade(0.2, '#fff')};
           }
         }
+
+        button {
+          background: transparent;
+          border: 0;
+          cursor: pointer;
+
+          svg {
+            color: #ff872c;
+            transition: color 0.2s;
+
+            &:hover {
+              color: ${shade(0.2, '#ff872c')};
+            }
+          }
+        }
       }
     }
   }

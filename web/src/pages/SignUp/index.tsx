@@ -5,6 +5,8 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
+import api from '../../services/api';
+
 // utils
 import getValidationError from '../../utils/getValidationErrors';
 
@@ -17,6 +19,7 @@ import { Container, Content, Background } from './styles';
 import logoImg from '../../assets/logo.svg';
 
 interface FormData {
+  name: string;
   email: string;
   password: string;
 }
@@ -24,7 +27,7 @@ interface FormData {
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: FormData) => {
+  const handleSubmit = useCallback(async (data: FormData, { reset }) => {
     try {
       formRef.current?.setErrors({});
       const schema = Yup.object().shape({
@@ -38,10 +41,15 @@ const SignUp: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
+
+      const response = await api.post('/users', data);
+      console.log(response.data);
     } catch (err) {
       const error = getValidationError(err);
       formRef.current?.setErrors(error);
     }
+
+    reset();
   }, []);
 
   return (

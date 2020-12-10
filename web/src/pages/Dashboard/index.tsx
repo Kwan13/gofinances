@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 // componentes
@@ -10,7 +10,63 @@ import entradasImg from '../../assets/entradas.svg';
 import saidasImg from '../../assets/saidas.svg';
 import totalImg from '../../assets/total.svg';
 
+import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
+import { useAuth } from '../../context/AuthContext';
+
+interface Transaction {
+  id: string;
+  title: string;
+  value: number;
+  type: 'income' | 'outcome';
+  formattedValue: string;
+  formattedDate: string;
+  category: string;
+  created_at: Date;
+}
+
+interface Balance {
+  income: string;
+  outcome: string;
+  total: string;
+}
+
 const Dashboard: React.FC = () => {
+  const { token } = useAuth();
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balance, setBalance] = useState<Balance>({} as Balance);
+
+  useEffect(() => {
+    async function getTransactions(): Promise<void> {
+      const response = await api.get('/transactions', {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      const transactionsFormatted = response.data.transactions.map(
+        (transaction: Transaction) => ({
+          ...transaction,
+          formattedValue: formatValue(transaction.value),
+          formattedDate: new Date(transaction.created_at).toLocaleDateString(
+            'pt-BR',
+          ),
+        }),
+      );
+
+      const balanceFormatted = {
+        income: formatValue(response.data.balance.income),
+        outcome: formatValue(response.data.balance.outcome),
+        total: formatValue(response.data.balance.total),
+      };
+
+      setTransactions(transactionsFormatted);
+      setBalance(balanceFormatted);
+    }
+
+    getTransactions();
+  }, [token]);
+
   return (
     <>
       <Header large />
@@ -21,7 +77,7 @@ const Dashboard: React.FC = () => {
               <p>Entradas</p>
               <img src={entradasImg} alt="Entradas" />
             </header>
-            <h1>R$ 1.000,00</h1>
+            <h1>{balance.income}</h1>
           </div>
 
           <div>
@@ -29,7 +85,7 @@ const Dashboard: React.FC = () => {
               <p>Saídas</p>
               <img src={saidasImg} alt="Saídas" />
             </header>
-            <h1>R$ 1.000,00</h1>
+            <h1>{balance.outcome}</h1>
           </div>
 
           <div>
@@ -37,7 +93,7 @@ const Dashboard: React.FC = () => {
               <p>Total</p>
               <img src={totalImg} alt="Total" />
             </header>
-            <h1>R$ 1.000,00</h1>
+            <h1>{balance.total}</h1>
           </div>
         </CardContainer>
 
@@ -71,19 +127,17 @@ const Dashboard: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Playstation 5</td>
-              <td>R$ 5.000,00</td>
-              <td>Jogos</td>
-              <td>10/05/1996</td>
-            </tr>
-
-            <tr>
-              <td>Playstation 5</td>
-              <td>R$ 5.000,00</td>
-              <td>Jogos</td>
-              <td>10/05/1996</td>
-            </tr>
+            {transactions.map(transaction => (
+              <tr key={transaction.id}>
+                <td>{transaction.title}</td>
+                <td className={transaction.type}>
+                  {transaction.type === 'outcome' && ' - '}
+                  {transaction.formattedValue}
+                </td>
+                <td>{transaction.category}</td>
+                <td>{transaction.formattedDate}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </Content>
