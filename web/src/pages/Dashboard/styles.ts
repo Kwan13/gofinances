@@ -4,6 +4,9 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   table {
     width: 100%;
@@ -44,6 +47,10 @@ export const Content = styled.div`
         border-radius: 0 8px 8px 0;
       }
     }
+  }
+
+  > span {
+    margin-top: 200px;
   }
 `;
 

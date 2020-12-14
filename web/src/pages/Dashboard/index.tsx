@@ -97,49 +97,53 @@ const Dashboard: React.FC = () => {
           </div>
         </CardContainer>
 
-        <table>
-          <thead>
-            <tr>
-              <td>
-                <span>
-                  Titulo
-                  <FiChevronDown />
-                </span>
-              </td>
-              <td>
-                <span>
-                  Preço
-                  <FiChevronDown />
-                </span>
-              </td>
-              <td>
-                <span>
-                  Categoria
-                  <FiChevronDown />
-                </span>
-              </td>
-              <td>
-                <span>
-                  Data
-                  <FiChevronUp color="#FF872C" />
-                </span>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map(transaction => (
-              <tr key={transaction.id}>
-                <td>{transaction.title}</td>
-                <td className={transaction.type}>
-                  {transaction.type === 'outcome' && ' - '}
-                  {transaction.formattedValue}
+        {transactions.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <td>
+                  <span>
+                    Titulo
+                    <FiChevronDown />
+                  </span>
                 </td>
-                <td>{transaction.category}</td>
-                <td>{transaction.formattedDate}</td>
+                <td>
+                  <span>
+                    Preço
+                    <FiChevronDown />
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    Categoria
+                    <FiChevronDown />
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    Data
+                    <FiChevronUp color="#FF872C" />
+                  </span>
+                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {transactions.map(transaction => (
+                <tr key={transaction.id}>
+                  <td>{transaction.title}</td>
+                  <td className={transaction.type}>
+                    {transaction.type === 'outcome' && ' - '}
+                    {transaction.formattedValue}
+                  </td>
+                  <td>{transaction.category}</td>
+                  <td>{transaction.formattedDate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <span>Você ainda não possui transações :(</span>
+        )}
       </Content>
     </>
   );

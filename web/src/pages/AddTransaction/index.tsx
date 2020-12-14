@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -32,7 +33,7 @@ const AddTransaction: React.FC = () => {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           title: Yup.string().required('Campo obrigatório.'),
-          value: Yup.number().required('Campo obrigatório.'),
+          value: Yup.string().required('Campo obrigatório.'),
           type: Yup.string().equals(
             ['income', 'outcome'],
             'Informe "income" ou "outcome".',
@@ -60,6 +61,19 @@ const AddTransaction: React.FC = () => {
     [token],
   );
 
+  const typeOptions = [
+    { value: 'income', label: 'entrada' },
+    { value: 'outcome', label: 'saida' },
+  ];
+
+  const categoryOptions = [
+    { value: 'renda', label: 'renda' },
+    { value: 'educação', label: 'educação' },
+    { value: 'alimentação', label: 'alimentação' },
+    { value: 'despesa fixa', label: 'despesa fixa' },
+    { value: 'outro', label: 'outro' },
+  ];
+
   return (
     <>
       <Header />
@@ -72,8 +86,13 @@ const AddTransaction: React.FC = () => {
           <h1>Nova Transação</h1>
           <Input name="title" placeholder="Titulo" />
           <Input name="value" placeholder="Valor" />
-          <Input name="type" placeholder="Tipo" />
-          <Input name="category" placeholder="Categoria" />
+
+          <Select name="type" options={typeOptions} placeholder="Tipo" />
+          <Select
+            name="category"
+            options={categoryOptions}
+            placeholder="categoria"
+          />
 
           <Button>Cadastrar</Button>
         </Form>
