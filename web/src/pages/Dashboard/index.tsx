@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiChevronDown, FiChevronUp, FiTrash2 } from 'react-icons/fi';
 
 // componentes
 import Header from '../../components/Header';
@@ -65,7 +65,22 @@ const Dashboard: React.FC = () => {
     }
 
     getTransactions();
-  }, [token]);
+  }, [token, transactions]);
+
+  const handleDeleteTransaction = useCallback(
+    async id => {
+      await api.delete(`/transactions/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      setTransactions(
+        transactions.filter(transaction => transaction.id !== id),
+      );
+    },
+    [token, transactions],
+  );
 
   return (
     <>
@@ -137,6 +152,14 @@ const Dashboard: React.FC = () => {
                   </td>
                   <td>{transaction.category}</td>
                   <td>{transaction.formattedDate}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteTransaction(transaction.id)}
+                    >
+                      <FiTrash2 size={20} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

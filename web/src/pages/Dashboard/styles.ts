@@ -1,3 +1,4 @@
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -36,6 +37,20 @@ export const Content = styled.div`
         }
         &.outcome {
           color: #e83f5b;
+        }
+
+        button {
+          background: transparent;
+          border: 0;
+
+          svg {
+            color: #e83f5b;
+            transition: color 0.2s;
+
+            &:hover {
+              color: ${shade(0.2, '#e83f5b')};
+            }
+          }
         }
       }
 
