@@ -1,5 +1,5 @@
 # GoFinances
-![GoFinances](https://i.imgur.com/SKpHPYi.png)
+![GoFinances](https://github.com/Kwan13/gofinances/blob/master/web/src/assets/capa.gif)
 
 ### Sobre
 GoFinances é uma aplicação que permite o usuário acompanhar sua própria vida financeira cadastrando transações.
