@@ -2,7 +2,11 @@
 ![GoFinances](https://i.imgur.com/SKpHPYi.png)
 
 ### Sobre
-GoFinances é uma aplicação que permite o usuário acompanhar sua própria vida financeira cadastrando transações, a versão inicial deste app foi desenvolvida pela Rocketseat como um desafio para os alunos do bootcamp GoStack, porem decidi recriar a aplicação totalmente do zero para colocar em prática alguns dos conhecimentos que venho adquirindo nos últimos meses.
+GoFinances é uma aplicação que permite o usuário acompanhar sua própria vida financeira cadastrando transações.
+
+A versão inicial deste projeto incluía apenas a página de "dashboard" e foi disponibilizada como desafio para os alunos do Bootcamp GoStack da Rocketseat, porem nesta versão <strong>tomei minhas proprias decisões durante o desenvolvimento </strong>adicionando um backend em NodeJS e páginas adicionais para tornar o projeto mais completo.
+
+<a href="https://www.figma.com/file/EgOhyj1Inz14dhWGVhRlhr/GoFinances?node-id=1%3A863">Design proposto pela Rocketseat</a>
 
 ### Tecnologias:
 
